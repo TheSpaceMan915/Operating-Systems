@@ -1,0 +1,5 @@
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/Operating_Systems.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runLab4Client.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runLab4Server.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/rebuild_cache.dir

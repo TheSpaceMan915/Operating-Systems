@@ -1,0 +1,6 @@
+C:\\Windows\\system32\\notepad.exe
+4
+C:\\Windows\\system32\\mspaint.exe
+5
+C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE
+5

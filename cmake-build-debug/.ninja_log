@@ -1,0 +1,23 @@
+# ninja log v5
+3	685	6893192415755770	CMakeFiles/runLab1.dir/Lab1/lab1.cpp.obj	3d6fdd8ce40be3dd
+0	1074	6893193149454285	CMakeFiles/Operating_Systems.dir/main.cpp.obj	4ec04d9fe909398f
+1898	2062	6893220519343563	runLab3.exe	163a81febbc666b4
+686	833	6893192417199828	runLab1.exe	fe7cc3826176679c
+1075	1218	6893193150852276	Operating_Systems.exe	2333b229a0fceb6d
+730	890	6893196452364877	runLab2.exe	489a5f7c5bf6d5c0
+3	1897	6893220517728073	CMakeFiles/runLab3.dir/Lab3/cpp/task1.cpp.obj	6c35503aee3dd01d
+0	729	6893196450790895	CMakeFiles/runLab2.dir/Lab2/lab2.cpp.obj	9bbeea39f140a8ed
+2	902	6893225141572581	CMakeFiles/runLab4.dir/Lab4/cpp/lab4_task1.cpp.obj	4162c8de6851d4e1
+903	1026	6893225142784349	runLab4.exe	872fc51bde22d1ef
+1	1517	6893231384295301	CMakeFiles/runLab4Server.dir/Lab4/cpp/lab4_task4_server.cpp.obj	a734e6beca01f9f0
+1519	1663	6893231385711548	runLab4Server.exe	55e0263806e8aa68
+0	1459	6893231593076675	CMakeFiles/runLab4Client.dir/Lab4/cpp/lab4_task4_client.cpp.obj	a69e2f5327ca45de
+1460	1565	6893231594091744	runLab4Client.exe	4d8c3562d5e0688a
+1	1812	6893235645940277	CMakeFiles/runLab4Server.dir/Lab4/cpp/lab4_task5_server.cpp.obj	4bf0cb86ed552bec
+1814	1946	6893235647240653	runLab4Server.exe	3fc10b1b5cf89fb9
+0	1794	6893235725145322	CMakeFiles/runLab4Client.dir/Lab4/cpp/lab4_task5_client.cpp.obj	183c7bb7d5c2b362
+1795	1901	6893235726184730	runLab4Client.exe	81c98e966676c69
+4	1913	6893237139626833	CMakeFiles/runLab4Server.dir/Lab4/cpp/lab4_task5_server.cpp.obj	4bf0cb86ed552bec
+1914	2046	6893237140932429	runLab4Server.exe	3fc10b1b5cf89fb9
+4	2173	6893634521965442	CMakeFiles/runLab4Server.dir/Lab4/cpp/lab4_task5_server.cpp.obj	4bf0cb86ed552bec
+2174	2481	6893634525009918	runLab4Server.exe	3fc10b1b5cf89fb9
