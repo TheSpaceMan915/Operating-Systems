@@ -1,5 +1,12 @@
 C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/Operating_Systems.dir
-C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runLab4Client.dir
-C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runLab4Server.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runTask4Client.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runTask4Server.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runTask5Client.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runTask5Server.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runTask6.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runTask7Server.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runTask7Client.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runTask8.dir
+C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/runLab5.dir
 C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -42,7 +42,7 @@ void drawCircle(int radius)
 }
 
 
-void drawRectangle(int l, int b)
+void printRectangle(int l, int b)
 {
 
 	int i, j;

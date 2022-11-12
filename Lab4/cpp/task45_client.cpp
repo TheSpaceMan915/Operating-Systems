@@ -33,16 +33,16 @@ void openConnectionWithServer()
 void writeToServer()
 {
 	//defining the name of the input file and the size of the buffer
-	char str_input[m_buff_size4] = "ThisShouldBeEncrypted";
+	char str_encrypted[m_buff_size4] = "ClientMessage";
 	DWORD not_writen_bytes;
 
 
 	BOOL flag_write_input = WriteFile(
-		m_connection_handle2,
-		str_input,
-		m_buff_size4,
-		&not_writen_bytes,
-		NULL);
+            m_connection_handle2,
+            str_encrypted,
+            m_buff_size4,
+            &not_writen_bytes,
+            NULL);
 
 
 	if (flag_write_input == FALSE)
@@ -58,26 +58,46 @@ void writeToServer()
 
 void readFromServer()
 {
-	char read_buf[m_buff_size4];
-	DWORD not_writen_bytes;
+	char read_buf_encrypted[m_buff_size4];
+    char read_buf_decrypted[m_buff_size4];
+    DWORD not_writen_bytes;
 
-	BOOL flag_read_from_pipe = ReadFile(
-		m_connection_handle2,
-		read_buf,
-		m_buff_size4,
-		&not_writen_bytes,
-		NULL);
+	BOOL flag_read_encrypted = ReadFile(
+            m_connection_handle2,
+            read_buf_encrypted,
+            m_buff_size4,
+            &not_writen_bytes,
+            NULL);
 
 
-	if (flag_read_from_pipe == FALSE)
+	if (flag_read_encrypted == FALSE)
 	{
 		cout << "The ReadFile has failed. The error code: " << GetLastError() << endl;
 	}
 	else
 	{
 		cout << "Reading success!" << endl;
-		cout << "The data from the server: " << read_buf << endl;
+		cout << "The data from the server: " << read_buf_encrypted << endl;
 	}
+
+
+    BOOL flag_read_decrypted = ReadFile(
+            m_connection_handle2,
+            read_buf_decrypted,
+            m_buff_size4,
+            &not_writen_bytes,
+            NULL);
+
+
+    if (flag_read_decrypted == FALSE)
+    {
+        cout << "The ReadFile has failed. The error code: " << GetLastError() << endl;
+    }
+    else
+    {
+        cout << "Reading success!" << endl;
+        cout << "The data from the server: " << read_buf_decrypted << endl;
+    }
 }
 
 

@@ -8,7 +8,8 @@ using namespace std;
 HANDLE m_pipe_handle3;
 const int m_buff_size3 = 1023;
 char m_input_file2[m_buff_size3];
-char m_output[m_buff_size3];
+char m_output_encrypted[m_buff_size3];
+char m_output_decrypted[m_buff_size3];
 
 
 void createPipeHandle()
@@ -82,33 +83,8 @@ void readFileName()
 	}
 }
 
-/*string readFile()
-{
-	ifstream fin(m_input_file2);
-	string str_text;
 
-	if (fin.is_open())
-	{
-		char ch;
-		while (fin.get(ch))
-		{
-			//adding the content of a file to str_text
-			str_text += ch;
-			cout << ch << endl;
-		}
-		//str_text[str_text.length() - 1] = ' ';
-	}
-	else
-	{
-		cerr << "Something went wrong" << endl;
-	}
-
-
-	fin.close();
-	return str_text;
-}*/
-
-// This function receives text and shift
+//This function receives text and shift
 //It returns the encrypted text
 string encryptStr(string text, int s)
 {
@@ -131,7 +107,7 @@ string encryptStr(string text, int s)
 }
 
 
-void createEncryptedRespond()
+void createResponds()
 {
 	//reading the file
 	string str_respond = m_input_file2;
@@ -139,35 +115,60 @@ void createEncryptedRespond()
 	//encrypting the text
 	string str_encrypted = encryptStr(str_respond, 4);
 
+    //decrypting the text
+    string str_decrypted = encryptStr(str_encrypted,-4);
 
 	//putting the encrypted text in the array
 	for (int i = 0; i < str_encrypted.length(); i++)
 	{
-		m_output[i] = str_encrypted[i];
+        m_output_encrypted[i] = str_encrypted[i];
 	}
 
+    //putting the decrypted text in the array
+    for (int i = 0; i < str_encrypted.length(); i++)
+    {
+        m_output_decrypted[i] = str_decrypted[i];
+    }
 }
+
 
 void writeToClient()
 {
 	//sending the text to the client
 	DWORD not_read_bytes;
 
-	BOOL flag_write_output = WriteFile(
-		m_pipe_handle3,
-		m_output,
-		m_buff_size3,
-		&not_read_bytes,
-		NULL);
+	BOOL flag_write_encrypted = WriteFile(
+            m_pipe_handle3,
+            m_output_encrypted,
+            m_buff_size3,
+            &not_read_bytes,
+            NULL);
 
-	if (flag_write_output == FALSE)
+	if (flag_write_encrypted == FALSE)
 	{
-		cout << "WriteFile output has failed. The error code: " << GetLastError() << endl;
+		cout << "WriteFile output_encrypted has failed. The error code: " << GetLastError() << endl;
 	}
 	else
 	{
 		cout << "The encrypted message has been put in the buffer" << endl;
 	}
+
+
+    BOOL flag_write_decrypted = WriteFile(
+            m_pipe_handle3,
+            m_output_decrypted,
+            m_buff_size3,
+            &not_read_bytes,
+            NULL);
+
+    if (flag_write_decrypted == FALSE)
+    {
+        cout << "WriteFile output_decrypted has failed. The error code: " << GetLastError() << endl;
+    }
+    else
+    {
+        cout << "The decrypted message has been put in the buffer" << endl;
+    }
 }
 
 
@@ -200,7 +201,7 @@ int main()
     openConnectionForClient();
 
     readFileName();
-    createEncryptedRespond();
+    createResponds();
 
     writeToClient();
     flushTheBuffer();

@@ -74,70 +74,301 @@ build Operating_Systems.exe: CXX_EXECUTABLE_LINKER__Operating_Systems_Debug CMak
   TARGET_PDB = Operating_Systems.exe.dbg
 
 # =============================================================================
-# Object build statements for EXECUTABLE target runLab4Client
+# Object build statements for EXECUTABLE target runTask4Client
 
 
 #############################################
-# Order-only phony target for runLab4Client
+# Order-only phony target for runTask4Client
 
-build cmake_object_order_depends_target_runLab4Client: phony || CMakeFiles/runLab4Client.dir
+build cmake_object_order_depends_target_runTask4Client: phony || CMakeFiles/runTask4Client.dir
 
-build CMakeFiles/runLab4Client.dir/Lab4/cpp/lab4_task5_client.cpp.obj: CXX_COMPILER__runLab4Client_Debug C$:/Users/nikit/CLionProjects/Operating$ Systems/Lab4/cpp/lab4_task5_client.cpp || cmake_object_order_depends_target_runLab4Client
-  DEP_FILE = CMakeFiles\runLab4Client.dir\Lab4\cpp\lab4_task5_client.cpp.obj.d
+build CMakeFiles/runTask4Client.dir/Lab4/cpp/task44_client.cpp.obj: CXX_COMPILER__runTask4Client_Debug C$:/Users/nikit/CLionProjects/Operating$ Systems/Lab4/cpp/task44_client.cpp || cmake_object_order_depends_target_runTask4Client
+  DEP_FILE = CMakeFiles\runTask4Client.dir\Lab4\cpp\task44_client.cpp.obj.d
   FLAGS = -g -std=gnu++23
-  OBJECT_DIR = CMakeFiles\runLab4Client.dir
-  OBJECT_FILE_DIR = CMakeFiles\runLab4Client.dir\Lab4\cpp
+  OBJECT_DIR = CMakeFiles\runTask4Client.dir
+  OBJECT_FILE_DIR = CMakeFiles\runTask4Client.dir\Lab4\cpp
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target runLab4Client
+# Link build statements for EXECUTABLE target runTask4Client
 
 
 #############################################
-# Link the executable runLab4Client.exe
+# Link the executable runTask4Client.exe
 
-build runLab4Client.exe: CXX_EXECUTABLE_LINKER__runLab4Client_Debug CMakeFiles/runLab4Client.dir/Lab4/cpp/lab4_task5_client.cpp.obj
+build runTask4Client.exe: CXX_EXECUTABLE_LINKER__runTask4Client_Debug CMakeFiles/runTask4Client.dir/Lab4/cpp/task44_client.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\runLab4Client.dir
+  OBJECT_DIR = CMakeFiles\runTask4Client.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = runLab4Client.exe
-  TARGET_IMPLIB = librunLab4Client.dll.a
-  TARGET_PDB = runLab4Client.exe.dbg
+  TARGET_FILE = runTask4Client.exe
+  TARGET_IMPLIB = librunTask4Client.dll.a
+  TARGET_PDB = runTask4Client.exe.dbg
 
 # =============================================================================
-# Object build statements for EXECUTABLE target runLab4Server
+# Object build statements for EXECUTABLE target runTask4Server
 
 
 #############################################
-# Order-only phony target for runLab4Server
+# Order-only phony target for runTask4Server
 
-build cmake_object_order_depends_target_runLab4Server: phony || CMakeFiles/runLab4Server.dir
+build cmake_object_order_depends_target_runTask4Server: phony || CMakeFiles/runTask4Server.dir
 
-build CMakeFiles/runLab4Server.dir/Lab4/cpp/lab4_task5_server.cpp.obj: CXX_COMPILER__runLab4Server_Debug C$:/Users/nikit/CLionProjects/Operating$ Systems/Lab4/cpp/lab4_task5_server.cpp || cmake_object_order_depends_target_runLab4Server
-  DEP_FILE = CMakeFiles\runLab4Server.dir\Lab4\cpp\lab4_task5_server.cpp.obj.d
+build CMakeFiles/runTask4Server.dir/Lab4/cpp/task44_server.cpp.obj: CXX_COMPILER__runTask4Server_Debug C$:/Users/nikit/CLionProjects/Operating$ Systems/Lab4/cpp/task44_server.cpp || cmake_object_order_depends_target_runTask4Server
+  DEP_FILE = CMakeFiles\runTask4Server.dir\Lab4\cpp\task44_server.cpp.obj.d
   FLAGS = -g -std=gnu++23
-  OBJECT_DIR = CMakeFiles\runLab4Server.dir
-  OBJECT_FILE_DIR = CMakeFiles\runLab4Server.dir\Lab4\cpp
+  OBJECT_DIR = CMakeFiles\runTask4Server.dir
+  OBJECT_FILE_DIR = CMakeFiles\runTask4Server.dir\Lab4\cpp
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target runLab4Server
+# Link build statements for EXECUTABLE target runTask4Server
 
 
 #############################################
-# Link the executable runLab4Server.exe
+# Link the executable runTask4Server.exe
 
-build runLab4Server.exe: CXX_EXECUTABLE_LINKER__runLab4Server_Debug CMakeFiles/runLab4Server.dir/Lab4/cpp/lab4_task5_server.cpp.obj
+build runTask4Server.exe: CXX_EXECUTABLE_LINKER__runTask4Server_Debug CMakeFiles/runTask4Server.dir/Lab4/cpp/task44_server.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\runLab4Server.dir
+  OBJECT_DIR = CMakeFiles\runTask4Server.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = runLab4Server.exe
-  TARGET_IMPLIB = librunLab4Server.dll.a
-  TARGET_PDB = runLab4Server.exe.dbg
+  TARGET_FILE = runTask4Server.exe
+  TARGET_IMPLIB = librunTask4Server.dll.a
+  TARGET_PDB = runTask4Server.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target runTask5Client
+
+
+#############################################
+# Order-only phony target for runTask5Client
+
+build cmake_object_order_depends_target_runTask5Client: phony || CMakeFiles/runTask5Client.dir
+
+build CMakeFiles/runTask5Client.dir/Lab4/cpp/task45_client.cpp.obj: CXX_COMPILER__runTask5Client_Debug C$:/Users/nikit/CLionProjects/Operating$ Systems/Lab4/cpp/task45_client.cpp || cmake_object_order_depends_target_runTask5Client
+  DEP_FILE = CMakeFiles\runTask5Client.dir\Lab4\cpp\task45_client.cpp.obj.d
+  FLAGS = -g -std=gnu++23
+  OBJECT_DIR = CMakeFiles\runTask5Client.dir
+  OBJECT_FILE_DIR = CMakeFiles\runTask5Client.dir\Lab4\cpp
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target runTask5Client
+
+
+#############################################
+# Link the executable runTask5Client.exe
+
+build runTask5Client.exe: CXX_EXECUTABLE_LINKER__runTask5Client_Debug CMakeFiles/runTask5Client.dir/Lab4/cpp/task45_client.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\runTask5Client.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = runTask5Client.exe
+  TARGET_IMPLIB = librunTask5Client.dll.a
+  TARGET_PDB = runTask5Client.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target runTask5Server
+
+
+#############################################
+# Order-only phony target for runTask5Server
+
+build cmake_object_order_depends_target_runTask5Server: phony || CMakeFiles/runTask5Server.dir
+
+build CMakeFiles/runTask5Server.dir/Lab4/cpp/task45_server.cpp.obj: CXX_COMPILER__runTask5Server_Debug C$:/Users/nikit/CLionProjects/Operating$ Systems/Lab4/cpp/task45_server.cpp || cmake_object_order_depends_target_runTask5Server
+  DEP_FILE = CMakeFiles\runTask5Server.dir\Lab4\cpp\task45_server.cpp.obj.d
+  FLAGS = -g -std=gnu++23
+  OBJECT_DIR = CMakeFiles\runTask5Server.dir
+  OBJECT_FILE_DIR = CMakeFiles\runTask5Server.dir\Lab4\cpp
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target runTask5Server
+
+
+#############################################
+# Link the executable runTask5Server.exe
+
+build runTask5Server.exe: CXX_EXECUTABLE_LINKER__runTask5Server_Debug CMakeFiles/runTask5Server.dir/Lab4/cpp/task45_server.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\runTask5Server.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = runTask5Server.exe
+  TARGET_IMPLIB = librunTask5Server.dll.a
+  TARGET_PDB = runTask5Server.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target runTask6
+
+
+#############################################
+# Order-only phony target for runTask6
+
+build cmake_object_order_depends_target_runTask6: phony || CMakeFiles/runTask6.dir
+
+build CMakeFiles/runTask6.dir/Lab4/cpp/task46.cpp.obj: CXX_COMPILER__runTask6_Debug C$:/Users/nikit/CLionProjects/Operating$ Systems/Lab4/cpp/task46.cpp || cmake_object_order_depends_target_runTask6
+  DEP_FILE = CMakeFiles\runTask6.dir\Lab4\cpp\task46.cpp.obj.d
+  FLAGS = -g -std=gnu++23
+  OBJECT_DIR = CMakeFiles\runTask6.dir
+  OBJECT_FILE_DIR = CMakeFiles\runTask6.dir\Lab4\cpp
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target runTask6
+
+
+#############################################
+# Link the executable runTask6.exe
+
+build runTask6.exe: CXX_EXECUTABLE_LINKER__runTask6_Debug CMakeFiles/runTask6.dir/Lab4/cpp/task46.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\runTask6.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = runTask6.exe
+  TARGET_IMPLIB = librunTask6.dll.a
+  TARGET_PDB = runTask6.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target runTask7Server
+
+
+#############################################
+# Order-only phony target for runTask7Server
+
+build cmake_object_order_depends_target_runTask7Server: phony || CMakeFiles/runTask7Server.dir
+
+build CMakeFiles/runTask7Server.dir/Lab4/cpp/task47_server.cpp.obj: CXX_COMPILER__runTask7Server_Debug C$:/Users/nikit/CLionProjects/Operating$ Systems/Lab4/cpp/task47_server.cpp || cmake_object_order_depends_target_runTask7Server
+  DEP_FILE = CMakeFiles\runTask7Server.dir\Lab4\cpp\task47_server.cpp.obj.d
+  FLAGS = -g -std=gnu++23
+  OBJECT_DIR = CMakeFiles\runTask7Server.dir
+  OBJECT_FILE_DIR = CMakeFiles\runTask7Server.dir\Lab4\cpp
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target runTask7Server
+
+
+#############################################
+# Link the executable runTask7Server.exe
+
+build runTask7Server.exe: CXX_EXECUTABLE_LINKER__runTask7Server_Debug CMakeFiles/runTask7Server.dir/Lab4/cpp/task47_server.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\runTask7Server.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = runTask7Server.exe
+  TARGET_IMPLIB = librunTask7Server.dll.a
+  TARGET_PDB = runTask7Server.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target runTask7Client
+
+
+#############################################
+# Order-only phony target for runTask7Client
+
+build cmake_object_order_depends_target_runTask7Client: phony || CMakeFiles/runTask7Client.dir
+
+build CMakeFiles/runTask7Client.dir/Lab4/cpp/task47_client.cpp.obj: CXX_COMPILER__runTask7Client_Debug C$:/Users/nikit/CLionProjects/Operating$ Systems/Lab4/cpp/task47_client.cpp || cmake_object_order_depends_target_runTask7Client
+  DEP_FILE = CMakeFiles\runTask7Client.dir\Lab4\cpp\task47_client.cpp.obj.d
+  FLAGS = -g -std=gnu++23
+  OBJECT_DIR = CMakeFiles\runTask7Client.dir
+  OBJECT_FILE_DIR = CMakeFiles\runTask7Client.dir\Lab4\cpp
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target runTask7Client
+
+
+#############################################
+# Link the executable runTask7Client.exe
+
+build runTask7Client.exe: CXX_EXECUTABLE_LINKER__runTask7Client_Debug CMakeFiles/runTask7Client.dir/Lab4/cpp/task47_client.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\runTask7Client.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = runTask7Client.exe
+  TARGET_IMPLIB = librunTask7Client.dll.a
+  TARGET_PDB = runTask7Client.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target runTask8
+
+
+#############################################
+# Order-only phony target for runTask8
+
+build cmake_object_order_depends_target_runTask8: phony || CMakeFiles/runTask8.dir
+
+build CMakeFiles/runTask8.dir/Lab4/cpp/task48.cpp.obj: CXX_COMPILER__runTask8_Debug C$:/Users/nikit/CLionProjects/Operating$ Systems/Lab4/cpp/task48.cpp || cmake_object_order_depends_target_runTask8
+  DEP_FILE = CMakeFiles\runTask8.dir\Lab4\cpp\task48.cpp.obj.d
+  FLAGS = -g -std=gnu++23
+  OBJECT_DIR = CMakeFiles\runTask8.dir
+  OBJECT_FILE_DIR = CMakeFiles\runTask8.dir\Lab4\cpp
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target runTask8
+
+
+#############################################
+# Link the executable runTask8.exe
+
+build runTask8.exe: CXX_EXECUTABLE_LINKER__runTask8_Debug CMakeFiles/runTask8.dir/Lab4/cpp/task48.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\runTask8.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = runTask8.exe
+  TARGET_IMPLIB = librunTask8.dll.a
+  TARGET_PDB = runTask8.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target runLab5
+
+
+#############################################
+# Order-only phony target for runLab5
+
+build cmake_object_order_depends_target_runLab5: phony || CMakeFiles/runLab5.dir
+
+build CMakeFiles/runLab5.dir/Lab5/drive_block_space.cpp.obj: CXX_COMPILER__runLab5_Debug C$:/Users/nikit/CLionProjects/Operating$ Systems/Lab5/drive_block_space.cpp || cmake_object_order_depends_target_runLab5
+  DEP_FILE = CMakeFiles\runLab5.dir\Lab5\drive_block_space.cpp.obj.d
+  FLAGS = -g -std=gnu++23
+  OBJECT_DIR = CMakeFiles\runLab5.dir
+  OBJECT_FILE_DIR = CMakeFiles\runLab5.dir\Lab5
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target runLab5
+
+
+#############################################
+# Link the executable runLab5.exe
+
+build runLab5.exe: CXX_EXECUTABLE_LINKER__runLab5_Debug CMakeFiles/runLab5.dir/Lab5/drive_block_space.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\runLab5.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = runLab5.exe
+  TARGET_IMPLIB = librunLab5.dll.a
+  TARGET_PDB = runLab5.exe.dbg
 
 
 #############################################
@@ -167,9 +398,23 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 build Operating_Systems: phony Operating_Systems.exe
 
-build runLab4Client: phony runLab4Client.exe
+build runLab5: phony runLab5.exe
 
-build runLab4Server: phony runLab4Server.exe
+build runTask4Client: phony runTask4Client.exe
+
+build runTask4Server: phony runTask4Server.exe
+
+build runTask5Client: phony runTask5Client.exe
+
+build runTask5Server: phony runTask5Server.exe
+
+build runTask6: phony runTask6.exe
+
+build runTask7Client: phony runTask7Client.exe
+
+build runTask7Server: phony runTask7Server.exe
+
+build runTask8: phony runTask8.exe
 
 # =============================================================================
 # Folder targets.
@@ -179,7 +424,7 @@ build runLab4Server: phony runLab4Server.exe
 #############################################
 # Folder: C:/Users/nikit/CLionProjects/Operating Systems/cmake-build-debug
 
-build all: phony Operating_Systems.exe runLab4Client.exe runLab4Server.exe
+build all: phony Operating_Systems.exe runTask4Client.exe runTask4Server.exe runTask5Client.exe runTask5Server.exe runTask6.exe runTask7Server.exe runTask7Client.exe runTask8.exe runLab5.exe
 
 # =============================================================================
 # Built-in targets
