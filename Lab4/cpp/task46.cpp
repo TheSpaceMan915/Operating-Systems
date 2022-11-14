@@ -15,26 +15,10 @@ struct Guess
     Guess(int x, int y) : m_row{x}, m_column{y} {}
 };
 
-/*class Player
-{
-private:
-    vector<Guess*> m_arr_guesses;
-
-public:
-    Player() : m_arr_guesses() {}
-
-    vector<Guess*>& getArrGuesses() { return m_arr_guesses; }
-};*/
-
 
 //global vars
-const int m_size = 3;
-char m_arr_chars[m_size][m_size] =
-{
-        {'2', '.', '.'},
-        {'.' ,'1','1'},
-        {'2','.','.'},
-};
+const int m_size = 6;
+char m_arr_gameboard[m_size][m_size];
 
 //random generator
 random_device m_rd;
@@ -43,12 +27,57 @@ mt19937 m_gen(m_rd());
 uniform_int_distribution<int> m_distr_positions(0, m_size - 1);
 
 
-void printArray()
+void createGameboard()
 {
     for (int i = 0; i < m_size; i++)
     {
         for (int j = 0; j < m_size; j++)
-        { cout << m_arr_chars[i][j] << '\t'; }
+        {  m_arr_gameboard[i][j] = '.'; }
+    }
+}
+
+
+void placeFirstPlayerShip()
+{
+    int row = 0;
+    int column = 0;
+
+    cout << "Enter row: " << endl;
+    cin >> row;
+    cout << "Enter column: " << endl;
+    cin >> column;
+
+    m_arr_gameboard[row][column] = '1';
+}
+
+
+void placeSecondPlayerShip()
+{
+    int row = 0;
+    int column = 0;
+
+    cout << "Enter row: " << endl;
+    cin >> row;
+    cout << "Enter column: " << endl;
+    cin >> column;
+
+    m_arr_gameboard[row][column] = '2';
+}
+
+
+void printGameboard()
+{
+    for (int i = 0; i < m_size; i++)
+    {
+        if ( i == 0)
+        {
+          cout << "\t0\t 1\t 2\t 3\t 4\t 5" << endl;
+        }
+        cout << i << '\t';
+        for (int j = 0; j < m_size; j++)
+        {
+            cout << m_arr_gameboard[i][j] << '\t';
+        }
         cout << endl;
     }
     cout << endl;
@@ -63,129 +92,77 @@ void printGuesses(vector<Guess*>& guesses)
 }
 
 
-void playFirstTurn(vector<Guess*>& player1_guesses)
+void playFirst(vector<Guess*>& player1_guesses)
 {
-    int row = 0;
-    int column = 0;
-
     //if the array of guesses is empty, make a random guess
     if (player1_guesses.empty())
     {
+        int row_rand = 0;
+        int column_rand = 0;
+
         do
         {
-            row = m_distr_positions(m_gen);
-            column = m_distr_positions(m_gen);
-        } while ((m_arr_chars[row][column] == '1') || (m_arr_chars[row][column] == 'x'));
-
+            row_rand = m_distr_positions(m_gen);
+            column_rand = m_distr_positions(m_gen);
+        } while ((m_arr_gameboard[row_rand][column_rand] == '1') || (m_arr_gameboard[row_rand][column_rand] == 'x'));
 
         //if there's an enemy's ship
-        if (m_arr_chars[row][column] == '2')
+        if (m_arr_gameboard[row_rand][column_rand] == '2')
         {
             cout << "The second player's ship has been hit" << endl;
-
-            //creating guesses for the first player
             int row_guess = 0;
             int column_guess = 0;
-            if (row == 0)
+
+
+            //below
+            row_guess = row_rand + 1;
+            column_guess = column_rand;
+            if (row_guess < m_size)
             {
-                if (column == 0)
-                {
-                    Guess* guess1 = new Guess(row + 1, column);
-                    Guess* guess2 = new Guess(row, column + 1);
-
-                    //adding guesses to the list
-                    player1_guesses.push_back(guess1);
-                    player1_guesses.push_back(guess2);
-                }
-                else if (column == 1)
-                {
-                    Guess* guess3 = new Guess(row, column - 1);
-                    Guess* guess4 = new Guess(row, column + 1);
-                    Guess* guess5 = new Guess(row + 1, column);
-
-                    player1_guesses.push_back(guess3);
-                    player1_guesses.push_back(guess4);
-                    player1_guesses.push_back(guess5);
-                }
-                else
-                {
-                    Guess* guess6 = new Guess(row, column - 1);
-                    Guess* guess7 = new Guess(row + 1, column);
-
-                    player1_guesses.push_back(guess6);
-                    player1_guesses.push_back(guess7);
-                }
+                Guess *guess1 = new Guess(row_guess, column_guess);
+                player1_guesses.push_back(guess1);
             }
-            else if (row == 1)
+
+
+            //above
+            row_guess = row_rand - 1;
+            column_guess = column_rand;
+            if (row_guess >= 0)
             {
-                if (column == 0)
-                {
-                    Guess* guess8 = new Guess(row + 1, column);
-                    Guess* guess9 = new Guess(row, column + 1);
-                    Guess* guess10 = new Guess(row - 1, column);
-
-                    //adding guesses to the list
-                    player1_guesses.push_back(guess8);
-                    player1_guesses.push_back(guess9);
-                    player1_guesses.push_back(guess10);
-                }
-                else if (column == 1)
-                {
-                    Guess* guess11 = new Guess(row + 1, column);
-                    Guess* guess12 = new Guess(row, column + 1);
-                    Guess* guess13 = new Guess(row - 1, column);
-                    Guess* guess14 = new Guess(row, column - 1);
-
-                    player1_guesses.push_back(guess11);
-                    player1_guesses.push_back(guess12);
-                    player1_guesses.push_back(guess13);
-                    player1_guesses.push_back(guess14);
-                }
-                else
-                {
-                    Guess* guess15 = new Guess(row - 1, column);
-                    Guess* guess16 = new Guess(row + 1, column);
-
-                    player1_guesses.push_back(guess15);
-                    player1_guesses.push_back(guess16);
-                }
+                Guess *guess2 = new Guess(row_guess, column_guess);
+                player1_guesses.push_back(guess2);
             }
-            else
+
+
+            //on the right
+            row_guess = row_rand;
+            column_guess = column_rand + 1;
+            if (column_guess < m_size)
             {
-                if (column == 0)
-                {
-                    Guess* guess17 = new Guess(row, column + 1);
-                    Guess* guess18 = new Guess(row - 1, column);
+                Guess *guess3 = new Guess(row_guess, column_guess);
+                player1_guesses.push_back(guess3);
+            }
 
-                    player1_guesses.push_back(guess17);
-                    player1_guesses.push_back(guess18);
-                }
-                else if (column == 1)
-                {
-                    Guess* guess19 = new Guess(row, column - 1);
-                    Guess* guess20 = new Guess(row, column + 1);
-                    Guess* guess21 = new Guess(row - 1, column);
 
-                    player1_guesses.push_back(guess19);
-                    player1_guesses.push_back(guess20);
-                    player1_guesses.push_back(guess21);
-                }
-                else
-                {
-                    Guess* guess22 = new Guess(row, column - 1);
-                    Guess* guess23 = new Guess(row - 1, column);
-
-                    player1_guesses.push_back(guess22);
-                    player1_guesses.push_back(guess23);
-                }
+            //on the left
+            row_guess = row_rand;
+            column_guess = column_rand - 1;
+            if (column_guess >= 0)
+            {
+                Guess *guess4 = new Guess(row_guess, column_guess);
+                player1_guesses.push_back(guess4);
             }
         }
         else
         { cout << "The first player has missed" << endl; }
+
+        m_arr_gameboard[row_rand][column_rand] = 'x';
     }
     else
     {
-        Guess* temp = nullptr;
+        Guess *temp = nullptr;
+        int row = 0;
+        int column = 0;
         do
         {
             //get a guess from the list
@@ -194,142 +171,90 @@ void playFirstTurn(vector<Guess*>& player1_guesses)
 
             row = temp->m_row;
             column = temp->m_column;
-        } while ((m_arr_chars[row][column] == '1') || (m_arr_chars[row][column] == 'x'));
+        } while ((m_arr_gameboard[row][column] == '1') || (m_arr_gameboard[row][column] == 'x'));
 
 
-        if (m_arr_chars[row][column] == '2')
+        if (m_arr_gameboard[row][column] == '2')
         { cout << "The second player's ship has been hit" << endl; }
         else
         { cout << "The first player has missed" << endl; }
-    }
 
-    m_arr_chars[row][column] = 'x';
+        m_arr_gameboard[row][column] = 'x';
+    }
 }
 
 
-void playSecondTurn(vector<Guess*>& player2_guesses)
+void playSecond(vector<Guess*>& player2_guesses)
 {
-    int row = 0;
-    int column = 0;
-
     //if the array of guesses is empty, make a random guess
     if (player2_guesses.empty())
     {
+        int row_rand = 0;
+        int column_rand = 0;
+
         do
         {
-            row = m_distr_positions(m_gen);
-            column = m_distr_positions(m_gen);
-        } while ((m_arr_chars[row][column] == '2') || (m_arr_chars[row][column] == 'x'));
-
+            row_rand = m_distr_positions(m_gen);
+            column_rand = m_distr_positions(m_gen);
+        } while ((m_arr_gameboard[row_rand][column_rand] == '2') || (m_arr_gameboard[row_rand][column_rand] == 'x'));
 
         //if there's an enemy's ship
-        if (m_arr_chars[row][column] == '1')
+        if (m_arr_gameboard[row_rand][column_rand] == '1')
         {
             cout << "The first player's ship has been hit" << endl;
-
-            //creating guesses for the first player
             int row_guess = 0;
             int column_guess = 0;
-            if (row == 0)
+
+
+            //below
+            row_guess = row_rand + 1;
+            column_guess = column_rand;
+            if (row_guess < m_size)
             {
-                if (column == 0)
-                {
-                    Guess* guess1 = new Guess(row + 1, column);
-                    Guess* guess2 = new Guess(row, column + 1);
-
-                    //adding guesses to the list
-                    player2_guesses.push_back(guess1);
-                    player2_guesses.push_back(guess2);
-                }
-                else if (column == 1)
-                {
-                    Guess* guess3 = new Guess(row, column - 1);
-                    Guess* guess4 = new Guess(row, column + 1);
-                    Guess* guess5 = new Guess(row + 1, column);
-
-                    player2_guesses.push_back(guess3);
-                    player2_guesses.push_back(guess4);
-                    player2_guesses.push_back(guess5);
-                }
-                else
-                {
-                    Guess* guess6 = new Guess(row, column - 1);
-                    Guess* guess7 = new Guess(row + 1, column);
-
-                    player2_guesses.push_back(guess6);
-                    player2_guesses.push_back(guess7);
-                }
+                Guess *guess1 = new Guess(row_guess, column_guess);
+                player2_guesses.push_back(guess1);
             }
-            else if (row == 1)
+
+
+            //above
+            row_guess = row_rand - 1;
+            column_guess = column_rand;
+            if (row_guess >= 0)
             {
-                if (column == 0)
-                {
-                    Guess* guess8 = new Guess(row + 1, column);
-                    Guess* guess9 = new Guess(row, column + 1);
-                    Guess* guess10 = new Guess(row - 1, column);
-
-                    //adding guesses to the list
-                    player2_guesses.push_back(guess8);
-                    player2_guesses.push_back(guess9);
-                    player2_guesses.push_back(guess10);
-                }
-                else if (column == 1)
-                {
-                    Guess* guess11 = new Guess(row + 1, column);
-                    Guess* guess12 = new Guess(row, column + 1);
-                    Guess* guess13 = new Guess(row - 1, column);
-                    Guess* guess14 = new Guess(row, column - 1);
-
-                    player2_guesses.push_back(guess11);
-                    player2_guesses.push_back(guess12);
-                    player2_guesses.push_back(guess13);
-                    player2_guesses.push_back(guess14);
-                }
-                else
-                {
-                    Guess* guess15 = new Guess(row - 1, column);
-                    Guess* guess16 = new Guess(row + 1, column);
-
-                    player2_guesses.push_back(guess15);
-                    player2_guesses.push_back(guess16);
-                }
+                Guess *guess2 = new Guess(row_guess, column_guess);
+                player2_guesses.push_back(guess2);
             }
-            else
+
+
+            //on the right
+            row_guess = row_rand;
+            column_guess = column_rand + 1;
+            if (column_guess < m_size)
             {
-                if (column == 0)
-                {
-                    Guess* guess17 = new Guess(row, column + 1);
-                    Guess* guess18 = new Guess(row - 1, column);
+                Guess *guess3 = new Guess(row_guess, column_guess);
+                player2_guesses.push_back(guess3);
+            }
 
-                    player2_guesses.push_back(guess17);
-                    player2_guesses.push_back(guess18);
-                }
-                else if (column == 1)
-                {
-                    Guess* guess19 = new Guess(row, column - 1);
-                    Guess* guess20 = new Guess(row, column + 1);
-                    Guess* guess21 = new Guess(row - 1, column);
 
-                    player2_guesses.push_back(guess19);
-                    player2_guesses.push_back(guess20);
-                    player2_guesses.push_back(guess21);
-                }
-                else
-                {
-                    Guess* guess22 = new Guess(row, column - 1);
-                    Guess* guess23 = new Guess(row - 1, column);
-
-                    player2_guesses.push_back(guess22);
-                    player2_guesses.push_back(guess23);
-                }
+            //on the left
+            row_guess = row_rand;
+            column_guess = column_rand - 1;
+            if (column_guess >= 0)
+            {
+                Guess *guess4 = new Guess(row_guess, column_guess);
+                player2_guesses.push_back(guess4);
             }
         }
         else
         { cout << "The second player has missed" << endl; }
+
+        m_arr_gameboard[row_rand][column_rand] = 'x';
     }
     else
     {
-        Guess* temp = nullptr;
+        Guess *temp = nullptr;
+        int row = 0;
+        int column = 0;
         do
         {
             //get a guess from the list
@@ -338,17 +263,18 @@ void playSecondTurn(vector<Guess*>& player2_guesses)
 
             row = temp->m_row;
             column = temp->m_column;
-        } while ((m_arr_chars[row][column] == '2') || (m_arr_chars[row][column] == 'x'));
+        } while ((m_arr_gameboard[row][column] == '2') || (m_arr_gameboard[row][column] == 'x'));
 
 
-        if (m_arr_chars[row][column] == '1')
+        if (m_arr_gameboard[row][column] == '1')
         { cout << "The first player's ship has been hit" << endl; }
         else
         { cout << "The second player has missed" << endl; }
-    }
 
-    m_arr_chars[row][column] = 'x';
+        m_arr_gameboard[row][column] = 'x';
+    }
 }
+
 
 void menu(vector<Guess*>& player1_guesses, vector<Guess*>& player2_guesses)
 {
@@ -357,12 +283,14 @@ void menu(vector<Guess*>& player1_guesses, vector<Guess*>& player2_guesses)
     do
     {
         cout << "What do you want to do?" << endl;
-        cout << "1)Play the first player's turn" << endl;
-        cout << "2)Play the second player's turn" << endl;
-        cout << "3)Print the gameboard" << endl;
-        cout << "4)Print first player's guesses" << endl;
-        cout << "5)Print second player's guesses" << endl;
-        cout << "6) Exit" << endl;
+        cout << "1)Place a first player's ship" << endl;
+        cout << "2)Place a second player's ship" << endl;
+        cout << "3)Play the first player's turn" << endl;
+        cout << "4)Play the second player's turn" << endl;
+        cout << "5)Print the gameboard" << endl;
+        cout << "6)Print first player's guesses" << endl;
+        cout << "7)Print second player's guesses" << endl;
+        cout << "8) Exit" << endl;
 
         cin >> choice;
         cin.ignore(32767, '\n');
@@ -371,28 +299,33 @@ void menu(vector<Guess*>& player1_guesses, vector<Guess*>& player2_guesses)
         switch (choice)
         {
             case 1:
-                playFirstTurn(player1_guesses);
+                placeFirstPlayerShip();
                 break;
 
             case 2:
-                playSecondTurn(player2_guesses);
+                placeSecondPlayerShip();
                 break;
-
             case 3:
-                printArray();
+                playFirst(player1_guesses);
                 break;
 
             case 4:
+                playSecond(player2_guesses);
+                break;
+
+            case 5:
+                printGameboard();
+                break;
+
+            case 6:
                 printGuesses(player1_guesses);
                 break;
 
-           case 5:
+           case 7:
                 printGuesses(player2_guesses);
                 break;
         }
-
-
-    } while (choice != 6);
+    } while (choice != 8);
 }
 
 int main()
@@ -400,6 +333,7 @@ int main()
     vector<Guess*> arr_player1_guesses;
     vector<Guess*> arr_player2_guesses;
 
+    createGameboard();
     menu(arr_player1_guesses, arr_player2_guesses);
 
     return 0;
