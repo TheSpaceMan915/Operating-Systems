@@ -13,4 +13,14 @@ void printArr(int size,const T arr[])
 }
 
 
+template <typename T>
+void printVector(const std::vector<T>& arr)
+{
+    for (T temp : arr)
+    {
+        std::cout << temp << ' ';
+    }
+    std::cout << std::endl;
+}
+
 #endif //LAB4_TASK1_CPP_HELPERS_H

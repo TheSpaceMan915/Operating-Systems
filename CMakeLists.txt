@@ -5,4 +5,5 @@ set(CMAKE_CXX_STANDARD 23)
 
 add_executable(Operating_Systems main.cpp)
 
-add_executable(runLab5 Lab5/drive_block_space.cpp)
+add_executable(runLab5 Lab5/cpp/task51.cpp)
+add_executable(runLab5V2 Lab5/cpp/task52.cpp)

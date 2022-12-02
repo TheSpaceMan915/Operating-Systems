@@ -16,7 +16,8 @@
 					"targetIndexes" : 
 					[
 						0,
-						1
+						1,
+						2
 					]
 				}
 			],
@@ -32,7 +33,8 @@
 					"targetIndexes" : 
 					[
 						0,
-						1
+						1,
+						2
 					]
 				}
 			],
@@ -41,15 +43,22 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Operating_Systems::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Operating_Systems-Debug-908c5edf6bdc07cff353.json",
+					"jsonFile" : "target-Operating_Systems-Debug-525ab0dbf9b0b3097422.json",
 					"name" : "Operating_Systems",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "runLab5::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-runLab5-Debug-8586c86b4e9a755e5912.json",
+					"jsonFile" : "target-runLab5-Debug-07fde09ece01e1316c62.json",
 					"name" : "runLab5",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "runLab5V2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-runLab5V2-Debug-3dc0bfb5e23e0d2b0e5b.json",
+					"name" : "runLab5V2",
 					"projectIndex" : 0
 				}
 			]
