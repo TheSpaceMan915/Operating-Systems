@@ -2,315 +2,279 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include <sstream>
 #include "../../helpers/helpers.h"
 using namespace std;
 
-//program should write the data in another free block if the data is bigger than the size of the block
+
+struct Block
+{
+    Block* m_left;
+    Block* m_right;
+    int m_size;
+    int m_data;
+
+
+    Block(Block* left = nullptr, Block* right = nullptr, int size = 8, int data_this_block = 0) : m_left{left}, m_right{right}, m_size{size}, m_data{data_this_block} {}
+
+    friend ostream& operator <<(ostream& out, Block& block)
+    {
+        out << block.m_data;
+//        out << block.m_data_next_block;
+        return out;
+    }
+};
+
 
 //global variables
-int m_size;
-int* m_arr_data;
-int* m_arr_bitmap;
+vector<int> m_arr_bitmap;
+vector<Block*> m_arr_blocks;
 
 
-//initialising the storage
-void initialiseBlockSpace(int size)
+void printBlocks(const vector<Block*>& arr)
 {
-    m_size = size;
-    m_arr_data = new int[size];
-    m_arr_bitmap = new int[size];
-
-    for (int i = 0; i < size; i++)
+    cout << "-------------------------------------------------------------------" << endl;
+    printf("%15s %15s %15s %15s", "Block number", "Left address", "Right address","Data");
+    cout << endl;
+    cout << "-------------------------------------------------------------------" << endl;
+    for (int i = 0; i < arr.size(); ++i)
     {
-        m_arr_data[i] = 0;
-        m_arr_bitmap[i] = 1;
-    }
-
-    cout << "The block space has been successfully initialised" << endl;
-}
-
-
-//m_array_bitmap[i] == 1 => the block is free
-//Otherwise, the block is busy
-//allocating empty blocks
-void allocateBlocks()
-{
-    int amount = 0;
-
-    cout << "How many blocks would you like to allocate?" << endl;
-    cin >> amount;
-
-    //getting the indexes of free blocks
-    vector<int> arr_block_indexes_free;
-    vector<int> arr_block_indexes_allocated;
-    for (int i = 0; i < m_size; i++)
-    {
-        if (m_arr_bitmap[i] == 1)
-        { arr_block_indexes_free.push_back(i); }
-    }
-
-
-    //if the number of free blocks >= the amount user asks for
-    if (arr_block_indexes_free.size() >= amount)
-    {
-        //allocating blocks
-        int temp = 0;
-        for (int j = 0; j < amount; j++)
-        {
-            temp = arr_block_indexes_free.back();
-            arr_block_indexes_free.pop_back();
-
-            arr_block_indexes_allocated.push_back(temp);
-            m_arr_bitmap[temp] = 0;
-        }
-
-        //printing the indexes of allocated blocks
-        cout << "The indexes of allocated blocks: ";
-        printVector(arr_block_indexes_allocated);
-    }
-    else
-    { cout << "There are not enough blocks to allocate" << endl; }
-}
-
-
-void freeBlocks()
-{
-    //getting the amount of blocks to be freed
-    cout << "How many blocks do you want to free?" << endl;
-    int amount = 0;
-    cin >> amount;
-
-    //getting the indexes of blocks to be freed
-    cout << "Enter the indexes of blocks" << endl;
-    int* arr_indexes = new int[amount];
-    int index = 0;
-
-    for (int i = 0; i < amount; ++i)
-    {
-        cin >> index;
-        arr_indexes[i] = index;
-    }
-
-    //freeing blocks and deleting data in the arr_data
-    for (int i = 0; i < amount; ++i)
-    {
-        index = arr_indexes[i];
-        m_arr_bitmap[index] = 1;
-        m_arr_data[index] = 0;
-    }
-
-    cout << "The blocks have been freed" << endl;
-}
-
-
-void writeValues()
-{
-    int amount = 0;
-    int index = 0;
-    int value = 0;
-    int* arr_indexes = new int[amount];
-
-    //getting the amount of blocks to write data in
-    cout << "How many blocks do you want to write data in?" << endl;
-    cin >> amount;
-
-    cout << "Enter the indexes of blocks" << endl;
-    for (int i = 0; i < amount; ++i)
-    {
-        cin >> index;
-
-        //checking if the block has been allocated
-        //if it has, accept the index. Otherwise, skip it
-        if (m_arr_bitmap[index] == 0)
-        { arr_indexes[i] = index; }
-        else
-        {
-            cout << "The block with index " << index << "is not allocated" << endl;
-            cout << "You ought to allocate the block first" << endl;
-            return;
-        }
-    }
-
-    cout << "Enter the values" << endl;
-    for (int i = 0; i < amount; ++i)
-    {
-        cin >> value;
-        index = arr_indexes[i];
-        m_arr_data[index] = value;
-    }
-}
-
-
-void readValues()
-{
-    int amount = 0;
-    int index = 0;
-    int* arr_indexes = new int[amount];
-
-    //getting the amount of blocks to read data from
-    cout << "How many blocks do you want to read data from?" << endl;
-    cin >> amount;
-
-    cout << "Enter the indexes of blocks" << endl;
-    for (int i = 0; i < amount; ++i)
-    {
-        cin >> index;
-        arr_indexes[i] = index;
-    }
-
-    cout << "Here are the values:" << endl;
-    for (int i = 0; i < amount; ++i)
-    {
-        index = arr_indexes[i];
-        cout << m_arr_data[index] << ' ';
+        printf("%15d %15p %15p %15d", i, arr.at(i)->m_left, arr.at(i)->m_right, arr.at(i)->m_data);
+        cout << endl;
     }
     cout << endl;
 }
 
 
+//m_array_bitmap[i] == 0 => the block has some space in it
+//Otherwise, the block is full
+void allocate()
+{
+    Block* block_new = new Block();
+
+    //adding a new block and 0 to the arrays
+    m_arr_blocks.push_back(block_new);
+    m_arr_bitmap.push_back(0);
+
+    cout << "A block has been allocated" << endl;
+}
+
+
+void write(int data)
+{
+    //allocating memory if there are no blocks, and user tries to write something
+    if (m_arr_blocks.empty())
+    { allocate(); }
+
+
+    //getting the last block from the array and its index in the bitmap
+    Block* block = m_arr_blocks.back();
+    int size_block = block->m_size;
+    int size_data_in_block = block->m_data;
+    int index_block = m_arr_blocks.size() - 1;
+
+
+    //checking if there's enough space for the data, and the block is not full
+    if (size_data_in_block + data > size_block)
+    {
+        //adding as much data as I can to the block
+        int free_space = size_block - size_data_in_block;
+        block->m_data += free_space;
+
+
+        //changing the state of the block on full in the bitmap
+        m_arr_bitmap[index_block] = 1;
+
+
+        //creating a new block and connecting to the previous one
+        allocate();
+        Block* block_new = m_arr_blocks.back();
+        block_new->m_left = block;
+        block->m_right = block_new;
+
+
+        //adding the other part of the data to a new block
+        int data_other = data - free_space;
+        write(data_other);
+
+        cout << "Some part of the data has been added to this block. And another part to the other block" << endl;
+//        cout << free_space << " bytes have been added to the block with index: " << index_block << endl;
+    }
+    else if (size_data_in_block + data == size_block)
+    {
+        //adding data to the block
+        block->m_data += data;
+
+        //changing the state of the block on full in the bitmap
+        m_arr_bitmap[index_block] = 1;
+
+        cout << "The data has been added" << endl;
+    }
+    else
+    {
+        block->m_data += data;
+        cout << "The data has been added" << endl;
+    }
+}
+
+
+void free()
+{
+    if (m_arr_blocks.empty())
+    { cout << "There are no blocks in the array" << endl; }
+    else if (m_arr_blocks.size() == 1)
+    {
+        Block* block_last = m_arr_blocks.back();
+
+        //deleting the block_last
+        m_arr_blocks.pop_back();
+        m_arr_bitmap.pop_back();
+        delete block_last;
+        block_last = nullptr;
+
+        cout << "A block has been freed" << endl;
+    }
+    else
+    {
+        //recursively deleting connected blocks
+        Block* block_last = m_arr_blocks.back();
+        if (block_last->m_left == nullptr)
+        {
+            m_arr_blocks.pop_back();
+            m_arr_bitmap.pop_back();
+            delete block_last;
+            block_last = nullptr;
+        }
+        else
+        {
+            m_arr_blocks.pop_back();
+            m_arr_bitmap.pop_back();
+            delete block_last;
+            block_last = nullptr;
+            free();
+        }
+
+        cout << "A block has been freed" << endl;
+    }
+}
+
+
+void read(int index_block)
+{
+    if (index_block >= 0)
+    {
+        if (index_block < m_arr_blocks.size())
+        { cout << "Read data: " << *m_arr_blocks.at(index_block) << endl; }
+        else
+        { cout << "Enter an index less than or equal to " << m_arr_blocks.size() << endl; }
+    }
+    else
+    { cout << "Enter an index greater than 0" << endl; }
+}
+
+
 void printInfo()
 {
-    //counting empty blocks
-    int counter_empty_blocks = 0;
-    for (int i = 0; i < m_size; ++i)
+    //counting busy blocks
+    int counter_busy_blocks = 0;
+    for (int i = 0; i < m_arr_bitmap.size(); ++i)
     {
-        if (m_arr_data[i] == 0)
-        { counter_empty_blocks++; }
+        if (m_arr_bitmap.at(i) == 1)
+        { counter_busy_blocks++; }
     }
 
-    cout << "The size of a data block: " << sizeof(m_arr_data[0]) << endl;
-    cout << "The size of the bitmap: " << sizeof(m_arr_bitmap[0]) * m_size << endl;
-    cout << "The amount of blocks: " << m_size << endl;
-    cout << "The amount of empty blocks: " << counter_empty_blocks << endl;
+    cout << "The size of a data block: " << sizeof(m_arr_blocks.at(0)) << endl;
+    cout << "The size of the bitmap: " << sizeof(m_arr_bitmap[0]) * m_arr_bitmap.size() << endl;
+    cout << "The amount of blocks: " << m_arr_blocks.size() << endl;
+    cout << "The amount of busy blocks: " << counter_busy_blocks << endl;
 }
 
 
 void commitTransaction()
 {
-    string file_path = R"(C:\Users\nikit\CLionProjects\Operating Systems\Lab5\files\transaction.txt)";
+    string file_blocks_path = R"(..\Lab5\files\blocks_transaction.txt)";
+    string file_bitmap_path = R"(..\Lab5\files\bitmap_transaction.txt)";
 
-    ofstream fout(file_path);
+
+    //saving the blocks in one file
+    ofstream fout(file_blocks_path);
     if (!fout)
     { cerr << "The file stream has not been opened" << endl; }
     else
     {
-        //saving the data array
-        fout << "m_arr_data:" << endl;
-
-        for (int i = 0; i < m_size; ++i)
+        int sum_data = 0;
+        for (Block* block : m_arr_blocks)
         {
-            fout << m_arr_data[i] << ' ';
+            sum_data += block->m_data;
+            if (block->m_right == nullptr)
+            {
+                fout << sum_data << endl;
+                sum_data = 0;
+            }
         }
-        fout << endl;
 
-
-        //saving the bitmap
-        fout << "m_arr_bitmap:" << endl;
-
-        for (int i = 0; i < m_size; ++i)
-        {
-            fout << m_arr_bitmap[i] << ' ';
-        }
-        fout << endl;
-
-        cout << "A transaction has just been committed" << endl;
+        fout.close();
     }
+
+    //saving the bitmap in the other file
+    ofstream fout2(file_bitmap_path);
+    if (!fout2)
+    { cerr << "The file stream has not been opened" << endl; }
+    else
+    {
+        //saving the bitmap
+        for (int i : m_arr_bitmap)
+        { fout2 << i << endl; }
+    }
+    fout2.close();
+
+    cout << "A transaction has just been committed" << endl;
 }
 
 
 void rollbackTransaction()
 {
-    string file_path = R"(C:\Users\nikit\CLionProjects\Operating Systems\Lab5\files\transaction.txt)";
+    string file_blocks_path = R"(..\Lab5\files\blocks_transaction.txt)";
 
-    ifstream fin(file_path);
-    if (!fin.is_open())
-    { cerr << "The file stream has not been opened" << endl; }
-    else
-    {
-        string temp1 = "";
-        string temp2 = "";
 
-        //reading the header
-        getline(fin,temp2);
+    //restoring the blocks
+    ifstream fin(file_blocks_path);
+    if (!fin.is_open()) { cerr << "The file stream has not been opened" << endl; }
+    else {
+        //deleting the data from the arrays
+        m_arr_bitmap.clear();
+        m_arr_blocks.clear();
 
-        //reading the arr_data
-        getline(fin,temp2);
+        //initialising new arrays
+        allocate();
 
-/*        int number = 0;
-        char c = ' ';
-        int j = 0;
-        for (int i = 0; i < temp2.size(); ++i)
+        //reading data from the file
+        int data_temp;
+        string str_temp = "";
+
+        while (getline(fin,str_temp))
         {
-            //taking a char from the string
-            c = temp2[i];
-            if (c != ' ')
-            {
-                //casting the char to an int
-                number = c - '0';
-
-                //placing the int to the m_arr_data
-                m_arr_data[j++] = number;
-            }
-        }*/
-        stringstream splitter(temp2);
-        for (int i = 0; i < m_size; ++i)
-        {
-            //getting a number from the string
-            splitter >> temp1;
-
-            //putting the number in the array
-            m_arr_data[i] = stoi(temp1);
+            data_temp = stoi(str_temp);
+            write(data_temp);
         }
 
-        //reading the header
-        getline(fin,temp2);
-
-        //reading the arr_bitmap
-        getline(fin,temp2);
-
-        for (int i = 0; i < m_size; ++i)
-        {
-            //getting a number from the string
-            splitter >> temp1;
-
-            //putting the number in the array
-            m_arr_bitmap[i] = stoi(temp1);
-        }
-/*        int number2 = 0;
-        char ch = ' ';
-        int k = 0;
-        for (int i = 0; i < temp2.size(); ++i)
-        {
-            //taking a char from the string
-            ch = temp2[i];
-            if (ch != ' ')
-            {
-                //casting the char to an int
-                number2 = ch - '0';
-
-                //placing the int to the m_arr_bitmap
-                m_arr_bitmap[k++] = number2;
-            }
-        }*/
         cout << "A rollback has been performed successfully" << endl;
     }
 }
 
+
 void menu()
 {
     int choice;
-
     do
     {
         cout << "What do you want to do?" << endl;
-        cout << "1)Print bitmap" << endl;
-        cout << "2)Print data array" << endl;
-        cout << "3)Allocate blocks" << endl;
-        cout << "4)Free blocks" << endl;
-        cout << "5)Write values in blocks" << endl;
-        cout << "6)Read values from blocks" << endl;
-        cout << "7)Print info" << endl;
+        cout << "1)Allocate a block" << endl;
+        cout << "2)Free a block" << endl;
+        cout << "3)Write bytes in the block" << endl;
+        cout << "4)Read bytes from the block" << endl;
+        cout << "5)Print the bitmap" << endl;
+        cout << "6)Print the blocks" << endl;
+        cout << "7)Print general info" << endl;
         cout << "8)Commit a transaction" << endl;
         cout << "9)Rollback a transaction" << endl;
         cout << "10)Exit" << endl;
@@ -322,26 +286,35 @@ void menu()
         switch (choice)
         {
             case 1:
-                printArr(m_size,m_arr_bitmap);
+                allocate();
                 break;
 
             case 2:
-                printArr(m_size,m_arr_data);
+                free();
                 break;
             case 3:
-                allocateBlocks();
+                //entering the amount of bytes to write
+                cout << "Enter the amount of bytes that you'd like to write" << endl;
+                int data_to_write;
+                cin >> data_to_write;
+
+                write(data_to_write);
                 break;
 
             case 4:
-                freeBlocks();
+                cout << "Enter the index of the block you'd like to read bytes from" << endl;
+                int index;
+                cin >> index;
+
+                read(index);
                 break;
 
             case 5:
-                writeValues();
+                printVector(m_arr_bitmap);
                 break;
 
             case 6:
-                readValues();
+                printBlocks(m_arr_blocks);
                 break;
 
             case 7:
@@ -354,6 +327,7 @@ void menu()
 
             case 9:
                 rollbackTransaction();
+                break;
         }
     } while (choice != 10);
 }
@@ -361,7 +335,7 @@ void menu()
 
 int main()
 {
-    initialiseBlockSpace(10);
+    allocate();
     menu();
 
     //printArr(m_size_array,m_array_bitmap);

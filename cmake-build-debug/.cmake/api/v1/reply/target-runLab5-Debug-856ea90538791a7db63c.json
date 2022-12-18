@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "runLab5V2.exe"
+			"path" : "runLab5.exe"
 		},
 		{
-			"path" : "runLab5V2.pdb"
+			"path" : "runLab5.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -27,7 +27,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 9,
+				"line" : 10,
 				"parent" : 0
 			}
 		]
@@ -59,7 +59,7 @@
 			]
 		}
 	],
-	"id" : "runLab5V2::@6890427a1f51a3e7e1df",
+	"id" : "runLab5::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -79,8 +79,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "runLab5V2",
-	"nameOnDisk" : "runLab5V2.exe",
+	"name" : "runLab5",
+	"nameOnDisk" : "runLab5.exe",
 	"paths" : 
 	{
 		"build" : ".",
@@ -101,7 +101,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Lab5/cpp/task52.cpp",
+			"path" : "Lab5/cpp/task51.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

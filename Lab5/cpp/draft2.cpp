@@ -6,15 +6,6 @@
 #include "../../helpers/helpers.h"
 using namespace std;
 
-/* program should write the data in another free block if the data is bigger than the size of the block
- create a struct with pointers to the previous and next blocks and data to store
- All the blocks will be in the list. The bitmap array will show the state of the blocks (free or busy)
-
- Initialise the list of blocks and bitmap in one function.
- Separately initialise the first and the last blocks (the first block will not have previous pointer and the last block will not have the next pointer)
-
- max size of a block 1 byte. User enters the size of the data that he wants to write in the block
- */
 
 struct Block
 {
@@ -156,6 +147,7 @@ void free()
     {
         Block* block = m_arr_blocks.back();
 
+
         //deleting the block
         m_arr_blocks.pop_back();
         m_arr_bitmap.pop_back();
@@ -168,8 +160,16 @@ void free()
     {
         //nulling the pointer of the block before the last one
         int index_last_block = m_arr_blocks.size() - 1;
+        Block* block_last = m_arr_blocks.back();
         Block* block_before_last = m_arr_blocks.at(index_last_block - 1);
         block_before_last->m_right = nullptr;
+
+
+        //deleting the data from the previous block
+        int data_in_last_block = block_last->m_data;
+        int data_remainder = block_last->m_size - data_in_last_block;
+        block_before_last->m_data -= data_remainder;
+
 
         //deleting the last block
         Block* block = m_arr_blocks.back();
